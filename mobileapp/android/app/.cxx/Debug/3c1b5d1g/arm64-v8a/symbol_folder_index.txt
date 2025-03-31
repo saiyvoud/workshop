@@ -1,0 +1,1 @@
+/Users/mac/Desktop/workshop/mobileapp/build/app/intermediates/cxx/Debug/3c1b5d1g/obj/arm64-v8a
