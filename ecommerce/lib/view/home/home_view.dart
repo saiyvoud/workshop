@@ -1,4 +1,7 @@
+import 'package:ecommerce/view/cart/cart_view.dart';
 import 'package:ecommerce/view/home/widget/banner_widget.dart';
+import 'package:ecommerce/view/home/widget/category_widget.dart';
+import 'package:ecommerce/view/home/widget/product_widget.dart';
 import 'package:ecommerce/view/home/widget/search_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -30,44 +33,52 @@ class _HomeViewState extends State<HomeView> {
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Container(
-              height: 48,
-              width: 48,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(60),
-              ),
-              child: Stack(
-                children: [
-                  Center(
-                    child: Icon(
-                      Icons.shopping_basket_rounded,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      height: 20,
-                      width: 20,
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(20),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CartView()),
+                );
+              },
+              child: Container(
+                height: 48,
+                width: 48,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(60),
+                ),
+                child: Stack(
+                  children: [
+                    Center(
+                      child: Icon(
+                        Icons.shopping_basket_rounded,
+                        color: Colors.grey,
                       ),
-                      child: Center(
-                        child: Text(
-                          "1",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "1",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -77,8 +88,10 @@ class _HomeViewState extends State<HomeView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-           SearchWidget(),
-           BannerWidget(),
+            SearchWidget(),
+            BannerWidget(),
+            CategoryWidget(),
+            ProductWidget(),
           ],
         ),
       ),

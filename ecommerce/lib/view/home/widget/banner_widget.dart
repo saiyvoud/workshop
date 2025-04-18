@@ -10,60 +10,71 @@ class BannerWidget extends StatefulWidget {
 
 class _BannerWidgetState extends State<BannerWidget> {
   List<String> bannerData = [
-    "assets/images/logo.png",
-    "assets/images/logo.png",
+    "assets/images/banner002.jpg",
+    "assets/images/banner001.png",
   ];
-  int currentIndex = 0;
 
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [_buildBanner(), SizedBox(height: 10), _buildIndicator()],
-    );
-  }
-
-  _buildBanner() {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-      child: CarouselSlider(
-        options: CarouselOptions(
-          autoPlay: true,
-          height: 200,
-          viewportFraction: 1,
-          scrollDirection: Axis.horizontal,
-          onPageChanged: (index, reason) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
-        ),
-        items:
-            bannerData.map((item) {
-              return Center(child: Image.asset(item, fit: BoxFit.cover));
-            }).toList(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [_banner(), _indicator()],
       ),
     );
   }
 
-  _buildIndicator() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children:
-          bannerData.map((url) {
-            int index = bannerData.indexOf(url);
+  _banner() {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 150.0,
+        autoPlay: true,
+        viewportFraction: 1,
+        disableCenter: true,
+        onPageChanged: (index, reason) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
+      ),
+      items:
+          bannerData.map((item) {
             return Container(
-              width: 8,
-              height: currentIndex == index ? 18 : 10,
-              margin: EdgeInsets.symmetric(horizontal: 4),
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
-                shape:
-                    currentIndex == index ? BoxShape.circle : BoxShape.circle,
-               // color: currentIndex == index ? Colors.green : Colors.grey,
-               color: currentIndex == index ?  Colors.black : Colors.transparent
+                color: Colors.green,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(item, fit: BoxFit.cover),
               ),
             );
           }).toList(),
+    );
+  }
+
+  _indicator() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:
+            bannerData.map((url) {
+              final index = bannerData.indexOf(url);
+              return Container(
+                width: 15,
+                height: 5,
+                margin: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: currentIndex == index ? Colors.green : Colors.grey,
+                ),
+              );
+            }).toList(),
+      ),
     );
   }
 }
